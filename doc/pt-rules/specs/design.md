@@ -58,4 +58,11 @@ https://raw.githubusercontent.com/Fone-1/pt-rules/main/PrivateTracker.list
 
 ## 实施范围
 
-后续实施包括初始化当前目录的 Git 仓库、连接目标远端、添加生成脚本和工作流、生成首版规则并验证后推送。此设计文档不表示这些实施步骤已经执行。
+## 实施状态
+
+- `generate_rules.py` 实现上游 JSON 抓取、字段解析、域名校验、规范化、去重排序和原子写入。
+- `.github/workflows/update-rules.yml` 配置每周日 02:00 UTC 定时任务、手动触发及内容变化时提交推送。
+- 首次生成读取 193 个 JSON，生成 193 条唯一规则；格式、排序和重复项检查均通过。
+- 已推送至 `main`，首个实现提交为 `acd461a`。
+- 已通过 GitHub Raw URL 验证远端规则文件返回 HTTP 200 且包含 193 行，并确认 GitHub Actions 将工作流识别为 active。
+- 定时任务尚未等到首次计划运行；实际定时运行及后续自动提交仍需由 GitHub Actions 执行记录确认。
